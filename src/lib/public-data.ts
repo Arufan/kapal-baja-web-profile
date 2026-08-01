@@ -9,6 +9,11 @@ function date(value: unknown) {
   return value instanceof Date ? value : new Date(String(value));
 }
 
+function dateOnly(value: unknown) {
+  const parsed = date(value);
+  return Number.isNaN(parsed.getTime()) ? null : parsed.toISOString().slice(0, 10);
+}
+
 export const getSettings = cache(async (): Promise<SiteSettings> => {
   try {
     const sql = getDb();
@@ -85,7 +90,7 @@ export const getGallery = cache(async (includeUnpublished = false): Promise<Gall
       : await sql`SELECT * FROM gallery_items WHERE published = TRUE ORDER BY sort_order, event_date DESC NULLS LAST, created_at DESC`;
     return rows.map((row) => ({
       id: Number(row.id), title: String(row.title), activity: String(row.activity), mediaType: row.media_type as GalleryItem["mediaType"],
-      mediaUrl: String(row.media_url), eventDate: row.event_date ? String(row.event_date).slice(0, 10) : null,
+      mediaUrl: String(row.media_url), eventDate: row.event_date ? dateOnly(row.event_date) : null,
       featured: Boolean(row.featured), published: Boolean(row.published), sortOrder: Number(row.sort_order),
     }));
   } catch (error) {
