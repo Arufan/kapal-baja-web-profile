@@ -25,7 +25,12 @@ export function SiteHeader() {
           <Image src="/logo-kapal-baja.png" alt="" width={54} height={54} priority />
           <span>
             <strong>KAPAL BAJA</strong>
-            <small>Keluarga Penjelajah Alam</small>
+            <small className="brand-tagline" aria-label="Selalu Siap Sedia">
+              <span className="brand-tagline__track" aria-hidden="true">
+                <span>Selalu Siap Sedia</span>
+                <span>Selalu Siap Sedia</span>
+              </span>
+            </small>
           </span>
         </Link>
 
