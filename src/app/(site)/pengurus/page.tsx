@@ -13,7 +13,7 @@ export default async function BoardPage() {
     <>
       <PageHero eyebrow={`PENGURUS · ${period}`} title="Menjaga arah, merawat keluarga." intro="Pengurus mengelola latihan, komunikasi, peralatan, administrasi, dan ruang belajar agar setiap kegiatan berjalan terarah." />
       <section className="content-section"><div className="shell">
-        <div className="board-period"><span>PERIODE AKTIF</span><strong>{period}</strong><p>Nama dan foto saat ini berupa placeholder hingga data resmi dilengkapi.</p></div>
+        <div className="board-period"><span>PERIODE AKTIF</span><strong>{period}</strong></div>
         <div className="board-grid">{members.map((member, index) => <article className={index === 0 ? "board-card board-card--lead" : "board-card"} key={member.id}><div className="board-card__photo">{member.photoUrl ? <Image src={member.photoUrl} alt={member.name} fill sizes="(max-width: 720px) 100vw, 33vw" unoptimized /> : <><UserRound /><span>FOTO<br />MENYUSUL</span></>}</div><div><span>{member.division}</span><h2>{member.name}</h2><p>{member.role}</p></div></article>)}</div>
       </div></section>
     </>
