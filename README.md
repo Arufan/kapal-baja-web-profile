@@ -13,7 +13,7 @@ Website resmi Unit Kegiatan Mahasiswa Keluarga Penjelajah Alam Bhayangkara Jakar
 
 ## Menjalankan secara lokal
 
-Persyaratan: Node.js 20+, pnpm, dan PostgreSQL.
+Persyaratan: Node.js 22.13+, pnpm 11.9, dan PostgreSQL.
 
 ```bash
 cp .env.example .env
