@@ -1,0 +1,60 @@
+services:
+  db:
+    container_name: kapal-baja-db
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: kapal_baja
+      POSTGRES_USER: kapal_baja
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - kapal_baja_postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U kapal_baja -d kapal_baja"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    networks:
+      - internal
+
+  web:
+    container_name: kapal-baja-web
+    build:
+      context: .
+      args:
+        SITE_URL: ${SITE_URL:?SITE_URL wajib diisi}
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: kapal_baja
+      DB_USER: kapal_baja
+      DB_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD wajib diisi}
+      ADMIN_NAME: ${ADMIN_NAME:-Admin Kapal Baja}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-kapalbaja@ubharajaya.ac.id}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
+      SITE_URL: ${SITE_URL:?SITE_URL wajib diisi}
+    volumes:
+      - kapal_baja_uploads:/app/data/uploads
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/api/health').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
+      interval: 15s
+      timeout: 5s
+      retries: 8
+      start_period: 25s
+    networks:
+      - internal
+      - proxy-net
+
+volumes:
+  kapal_baja_postgres:
+  kapal_baja_uploads:
+
+networks:
+  internal:
+    driver: bridge
+  proxy-net:
+    external: true
