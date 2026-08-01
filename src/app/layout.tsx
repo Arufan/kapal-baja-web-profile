@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "@fontsource-variable/manrope";
 import "@fontsource-variable/saira/wdth.css";
 import "@fontsource-variable/jetbrains-mono";
@@ -35,7 +36,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id" className="h-full">
-      <body>{children}</body>
+      <body>
+        <Script id="welcome-preflight" strategy="beforeInteractive">{`
+          try {
+            if (sessionStorage.getItem("kapal-baja-welcome-seen") === "1" || matchMedia("(prefers-reduced-motion: reduce)").matches) {
+              document.documentElement.classList.add("welcome-suppressed");
+            }
+          } catch (_) {}
+        `}</Script>
+        {children}
+      </body>
     </html>
   );
 }

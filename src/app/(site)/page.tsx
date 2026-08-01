@@ -16,11 +16,12 @@ export default async function HomePage() {
   return (
     <>
       <section className="hero">
+        <div className="hero__atmosphere" aria-hidden="true"><i /><i /><i /></div>
         <div className="hero__terrain" aria-hidden="true"><i /><i /><i /></div>
         <div className="shell hero__grid">
           <div className="hero__copy">
             <p className="hero__eyebrow"><span>UKM</span> KELUARGA PENJELAJAH ALAM · UBHARA JAYA</p>
-            <h1>{settings.heroTitle}</h1>
+            <h1 className="hero-title" data-title={settings.heroTitle}>{settings.heroTitle}</h1>
             <p className="hero__intro">{settings.heroSubtitle}</p>
             <div className="hero__actions">
               <Link className="button button--sun" href="/bergabung">Mulai perjalanan <ArrowRight size={18} /></Link>

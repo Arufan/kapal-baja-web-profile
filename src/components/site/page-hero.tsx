@@ -1,6 +1,7 @@
 export function PageHero({ eyebrow, title, intro }: { eyebrow: string; title: string; intro: string }) {
   return (
     <section className="page-hero">
+      <div className="page-hero__glow" aria-hidden="true" />
       <div className="page-hero__terrain" aria-hidden="true" />
       <div className="shell page-hero__inner">
         <p className="utility-label">{eyebrow}</p>
