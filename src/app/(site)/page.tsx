@@ -4,6 +4,7 @@ import { ArrowRight, Compass, MapPin, MoveRight, ShieldCheck } from "lucide-reac
 import { GalleryCard } from "@/components/site/gallery-card";
 import { SectionHeading } from "@/components/site/section-heading";
 import { DivisionIcon } from "@/components/site/division-icon";
+import { DivisionTerrain } from "@/components/site/division-terrain";
 import { HeroHeadline } from "@/components/site/hero-headline";
 import { formatCompactDate, formatEventDate } from "@/lib/format";
 import { getDivisions, getEvents, getGallery, getSettings } from "@/lib/public-data";
@@ -13,6 +14,9 @@ export default async function HomePage() {
   const now = new Date();
   const upcomingEvents = events.filter((event) => (event.endAt ?? event.startAt) >= now);
   const nextEvent = upcomingEvents.find((event) => event.featured) ?? upcomingEvents[0];
+  const interestDivisions = ["gunung-hutan", "panjat-tebing"]
+    .map((slug) => divisions.find((division) => division.slug === slug))
+    .filter((division): division is NonNullable<typeof division> => Boolean(division));
 
   return (
     <>
@@ -77,17 +81,41 @@ export default async function HomePage() {
 
       <section className="trail-section divisions-preview">
         <div className="shell">
-          <SectionHeading pos="POS 02" eyebrow="BIDANG MINAT" title="Temukan medanmu." copy="Setiap divisi punya keterampilan, ritme, dan tantangan yang berbeda. Semuanya bertemu pada budaya belajar yang sama." />
-          <div className="division-strip">
-            {divisions.slice(0, 5).map((division, index) => (
-              <article className="division-tile" key={division.id}>
-                <div className="division-tile__top"><span>{String(index + 1).padStart(2, "0")}</span><DivisionIcon name={division.iconKey} /></div>
-                <h3>{division.name}</h3><p>{division.tagline}</p>
-                <Link href={`/divisi#${division.slug}`} aria-label={`Lihat divisi ${division.name}`}><ArrowRight /></Link>
-              </article>
-            ))}
+          <SectionHeading pos="POS 02" eyebrow="BIDANG MINAT" title="Pilih medanmu." copy="Pilih medan darat atau vertikal untuk menguji diri—keduanya dibangun di atas teknik, keselamatan, dan kerja tim." />
+          <div className="division-showcase">
+            {interestDivisions.map((division, index) => {
+              const isVertical = division.slug === "panjat-tebing";
+
+              return (
+                <article className={`division-tile division-tile--${isVertical ? "vertical" : "mountain"}`} key={division.id}>
+                  <Link className="division-tile__link" href={`/divisi#${division.slug}`} aria-label={`Jelajahi divisi ${division.name}`}>
+                    <DivisionTerrain variant={isVertical ? "vertical" : "mountain"} />
+                    <div className="division-tile__top">
+                      <span>MEDAN {String(index + 1).padStart(2, "0")}</span>
+                      <span className="division-tile__status"><i /> PEMINATAN AKTIF</span>
+                    </div>
+                    <div className="division-tile__icon" aria-hidden="true">
+                      <span />
+                      <DivisionIcon name={division.iconKey} size={38} />
+                    </div>
+                    <div className="division-tile__body">
+                      <p className="division-tile__kind">{isVertical ? "MEDAN VERTIKAL" : "MEDAN DARAT"}</p>
+                      <h3>{division.name}</h3>
+                      <p>{division.description}</p>
+                    </div>
+                    <div className="division-tile__footer">
+                      <span>Masuk ke medan</span>
+                      <span className="division-tile__arrow"><ArrowRight size={20} /></span>
+                    </div>
+                  </Link>
+                </article>
+              );
+            })}
           </div>
-          <Link className="button button--outline" href="/divisi">Jelajahi semua divisi <ArrowRight size={17} /></Link>
+          <div className="division-showcase__base">
+            <p><strong>{String(interestDivisions.length).padStart(2, "0")}</strong><span>bidang peminatan aktif<br />satu budaya keselamatan</span></p>
+            <Link className="text-link" href="/divisi">Lihat detail peminatan <ArrowRight size={17} /></Link>
+          </div>
         </div>
       </section>
 
