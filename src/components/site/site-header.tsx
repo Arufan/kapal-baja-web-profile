@@ -22,7 +22,7 @@ export function SiteHeader() {
       <div className="site-header__inner shell">
         <Link href="/" className="brand-lockup" aria-label="UKM Kapal Baja — Beranda">
           <span>
-            <strong>KAPAL BAJA</strong>
+            <strong data-wordmark="KAPAL BAJA">KAPAL BAJA</strong>
             <small className="brand-tagline" aria-label="Selalu Siap Sedia">
               <span className="brand-tagline__track" aria-hidden="true">
                 <span>Selalu Siap Sedia</span>

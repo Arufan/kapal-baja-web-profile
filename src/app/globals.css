@@ -104,7 +104,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .site-header__inner { height: 100%; display: flex; align-items: center; justify-content: space-between; }
 .brand-lockup { display: inline-flex; align-items: center; }
 .brand-lockup > span { display: flex; flex-direction: column; line-height: 1.05; }
-.brand-lockup strong { font-family: var(--font-display); font-size: 1.4rem; font-weight: 850; letter-spacing: .055em; }
+.brand-lockup strong { position: relative; display: inline-block; color: white; font-family: var(--font-display); font-size: 1.4rem; font-weight: 850; letter-spacing: .055em; }
+.brand-lockup strong::after { position: absolute; inset: 0; color: #fff8b5; content: attr(data-wordmark); pointer-events: none; text-shadow: 0 0 8px rgba(244,213,47,.48); -webkit-mask-image: linear-gradient(90deg, transparent, #000 42%, #000 58%, transparent); mask-image: linear-gradient(90deg, transparent, #000 42%, #000 58%, transparent); -webkit-mask-position: -70% 0; mask-position: -70% 0; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-size: 42% 100%; mask-size: 42% 100%; animation: brand-wordmark-glint 6.2s cubic-bezier(.22, 1, .36, 1) infinite; }
 .brand-lockup small { display: block; width: 8.9rem; margin-top: 5px; overflow: hidden; font-family: var(--font-utility); font-size: .57rem; letter-spacing: .09em; text-transform: uppercase; opacity: .78; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
 .brand-tagline__track { display: flex; width: max-content; animation: brand-tagline-loop 9s linear infinite; }
 .brand-tagline__track > span { flex: none; padding-right: 1.1rem; white-space: nowrap; }
@@ -446,6 +447,7 @@ body.welcome-active .hero__basecamp { animation-play-state: paused; }
 @keyframes slow-spin { to { transform: rotate(360deg); } }
 @keyframes rise-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes brand-tagline-loop { to { transform: translateX(-50%); } }
+@keyframes brand-wordmark-glint { 0%, 66% { -webkit-mask-position: -70% 0; mask-position: -70% 0; } 88%, 100% { -webkit-mask-position: 170% 0; mask-position: 170% 0; } }
 
 @media (max-width: 1060px) {
   .desktop-nav { display: none; }
@@ -604,7 +606,13 @@ body.welcome-active .hero__basecamp { animation-play-state: paused; }
   .hero__atmosphere, .hero__terrain, .hero__emblem, .page-hero__glow { transform: none !important; }
   .page-hero__terrain { transform: rotate(-17deg) !important; }
   .event-detail__cover { transform: scale(1.02) !important; }
+  .brand-lockup strong::after { display: none; }
   html.motion-enabled [data-motion-reveal] { opacity: 1 !important; transform: none !important; }
+}
+
+@media (forced-colors: active) {
+  .brand-lockup strong { color: CanvasText; }
+  .brand-lockup strong::after { display: none; }
 }
 
 /* Admin and authentication */
