@@ -4,6 +4,7 @@ import { ArrowRight, Compass, MapPin, MoveRight, ShieldCheck } from "lucide-reac
 import { GalleryCard } from "@/components/site/gallery-card";
 import { SectionHeading } from "@/components/site/section-heading";
 import { DivisionIcon } from "@/components/site/division-icon";
+import { HeroHeadline } from "@/components/site/hero-headline";
 import { formatCompactDate, formatEventDate } from "@/lib/format";
 import { getDivisions, getEvents, getGallery, getSettings } from "@/lib/public-data";
 
@@ -21,7 +22,7 @@ export default async function HomePage() {
         <div className="shell hero__grid">
           <div className="hero__copy">
             <p className="hero__eyebrow"><span>UKM</span> KELUARGA PENJELAJAH ALAM · UBHARA JAYA</p>
-            <h1 className="hero-title" data-title={settings.heroTitle}>{settings.heroTitle}</h1>
+            <HeroHeadline title={settings.heroTitle} />
             <p className="hero__intro">{settings.heroSubtitle}</p>
             <div className="hero__actions">
               <Link className="button button--sun" href="/bergabung">Mulai perjalanan <ArrowRight size={18} /></Link>
