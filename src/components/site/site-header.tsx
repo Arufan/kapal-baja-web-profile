@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { Menu, Mountain, X } from "lucide-react";
 import { usePathname } from "next/navigation";
@@ -22,7 +21,6 @@ export function SiteHeader() {
     <header className="site-header">
       <div className="site-header__inner shell">
         <Link href="/" className="brand-lockup" aria-label="UKM Kapal Baja — Beranda">
-          <Image src="/logo-kapal-baja.png" alt="" width={54} height={54} priority />
           <span>
             <strong>KAPAL BAJA</strong>
             <small className="brand-tagline" aria-label="Selalu Siap Sedia">

@@ -102,10 +102,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .site-header { position: absolute; inset: 0 0 auto; z-index: 50; height: 88px; color: white; }
 .site-header::after { position: absolute; right: 0; bottom: 0; left: 0; height: 1px; background: rgba(255,255,255,.22); content: ""; }
 .site-header__inner { height: 100%; display: flex; align-items: center; justify-content: space-between; }
-.brand-lockup { display: flex; align-items: center; gap: 12px; }
-.brand-lockup img { width: 54px; height: 54px; object-fit: contain; filter: drop-shadow(0 2px 2px rgba(0,0,0,.25)); }
+.brand-lockup { display: inline-flex; align-items: center; }
 .brand-lockup > span { display: flex; flex-direction: column; line-height: 1.05; }
-.brand-lockup strong { font-family: var(--font-display); font-size: 1.28rem; font-weight: 850; letter-spacing: .045em; }
+.brand-lockup strong { font-family: var(--font-display); font-size: 1.4rem; font-weight: 850; letter-spacing: .055em; }
 .brand-lockup small { display: block; width: 8.9rem; margin-top: 5px; overflow: hidden; font-family: var(--font-utility); font-size: .57rem; letter-spacing: .09em; text-transform: uppercase; opacity: .78; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
 .brand-tagline__track { display: flex; width: max-content; animation: brand-tagline-loop 9s linear infinite; }
 .brand-tagline__track > span { flex: none; padding-right: 1.1rem; white-space: nowrap; }
@@ -490,8 +489,7 @@ body.welcome-active .hero__basecamp { animation-play-state: paused; }
   .event-detail__cover { transform: scale(1.035); }
   html.motion-enabled [data-motion-reveal]:not([data-motion-reveal="trail"]) { transition-delay: 0ms; }
   .site-header { height: 76px; }
-  .brand-lockup img { width: 44px; height: 44px; }
-  .brand-lockup strong { font-size: 1.08rem; }
+  .brand-lockup strong { font-size: 1.16rem; }
   .brand-lockup small { width: 7.7rem; font-size: .49rem; }
   .hero { min-height: auto; padding-top: 125px; }
   .hero::after, .trail-section::before, .trail-section::after { display: none; }
